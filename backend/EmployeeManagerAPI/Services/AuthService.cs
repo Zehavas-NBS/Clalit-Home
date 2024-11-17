@@ -59,7 +59,35 @@ namespace EmployeeManagerAPI.Services
             new Employee
             {
                 FullName = "Default Employee 2",
-                Email = "employee2@example.com",
+                Email = "employreqree2@example.com",
+                Password = BCrypt.Net.BCrypt.HashPassword("password2"), // Hash לסיסמה
+                ManagerId = manager.Id
+            },
+             new Employee
+            {
+                FullName = "Default Employee 3",
+                Email = "employereqwrwee1@example.com",
+                Password = BCrypt.Net.BCrypt.HashPassword("password1"), // Hash לסיסמה
+                ManagerId = manager.Id
+            },
+            new Employee
+            {
+                FullName = "Default Employee 4",
+                Email = "employereqrqwe2@example.com",
+                Password = BCrypt.Net.BCrypt.HashPassword("password2"), // Hash לסיסמה
+                ManagerId = manager.Id
+            },
+             new Employee
+            {
+                FullName = "Default Employee 5",
+                Email = "emplqerqweroyee1@example.com",
+                Password = BCrypt.Net.BCrypt.HashPassword("password1"), // Hash לסיסמה
+                ManagerId = manager.Id
+            },
+            new Employee
+            {
+                FullName = "Default Employee 6",
+                Email = "employeerqewe2@example.com",
                 Password = BCrypt.Net.BCrypt.HashPassword("password2"), // Hash לסיסמה
                 ManagerId = manager.Id
             }

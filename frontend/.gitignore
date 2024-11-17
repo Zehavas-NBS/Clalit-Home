@@ -27,3 +27,8 @@ yarn-error.log*
 .vs/
 .idea/
 *.suo
+
+bin/
+obj/
+*.dll
+*.exe
