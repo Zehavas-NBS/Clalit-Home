@@ -1,0 +1,265 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\services\\employeesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\services\\employeesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\models\\responses\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\models\\responses\\loginresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\models\\responses\\getemployeesresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\models\\responses\\getemployeesresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\models\\requests\\managersignuprequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\models\\requests\\managersignuprequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\models\\requests\\signinrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\models\\requests\\signinrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\employeemanagerapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\employeemanagerapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|c:\\users\\hp\\desktop\\react\\clalit\\projecthome\\backend\\employeemanagerapi\\employeemanagerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{FD6353C7-105D-4321-AABB-C54DB495AE7D}|EmployeeManagerAPI\\EmployeeManagerAPI.csproj|solutionrelative:employeemanagerapi\\employeemanagerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LoginResponse.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Models\\Responses\\LoginResponse.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Models\\Responses\\LoginResponse.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Models\\Responses\\LoginResponse.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Models\\Responses\\LoginResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-17T13:51:21.396Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ManagerSignupRequest.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Models\\Requests\\ManagerSignupRequest.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Models\\Requests\\ManagerSignupRequest.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Models\\Requests\\ManagerSignupRequest.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Models\\Requests\\ManagerSignupRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T11:57:14.867Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmployeesService.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Services\\EmployeesService.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Services\\EmployeesService.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Services\\EmployeesService.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Services\\EmployeesService.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAQwEAAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-17T11:12:01.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GetEmployeesResponse.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Models\\Responses\\GetEmployeesResponse.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Models\\Responses\\GetEmployeesResponse.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Models\\Responses\\GetEmployeesResponse.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Models\\Responses\\GetEmployeesResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-17T12:18:47.09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Services\\AuthService.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Services\\AuthService.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAgwCEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-17T10:51:19.843Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SignInRequest.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Models\\Requests\\SignInRequest.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Models\\Requests\\SignInRequest.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Models\\Requests\\SignInRequest.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Models\\Requests\\SignInRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-15T00:44:10.053Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmployeesController.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Controllers\\EmployeesController.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Controllers\\EmployeesController.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Controllers\\EmployeesController.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Controllers\\EmployeesController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAjwCMAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-17T01:06:07.917Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAYwDoAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T10:59:35.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Program.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Program.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Program.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAnwA0AAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-13T22:27:19.568Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\appsettings.json",
+              "RelativeToolTip": "EmployeeManagerAPI\\appsettings.json",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-14T12:17:04.361Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAIAxwA8AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T23:17:06.865Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "EmployeeManagerAPI.http",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\EmployeeManagerAPI.http",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\EmployeeManagerAPI.http",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\EmployeeManagerAPI.http",
+              "RelativeToolTip": "EmployeeManagerAPI\\EmployeeManagerAPI.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-11-14T20:57:17.743Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Properties\\launchSettings.json",
+              "RelativeToolTip": "EmployeeManagerAPI\\Properties\\launchSettings.json",
+              "ViewState": "AgIAABAAAAAAAAAAAAAuwBoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-14T21:00:06.918Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Models\\User.cs",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\Models\\User.cs",
+              "RelativeToolTip": "EmployeeManagerAPI\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T23:50:17.602Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "EmployeeManagerAPI.csproj",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\EmployeeManagerAPI.csproj",
+              "RelativeDocumentMoniker": "EmployeeManagerAPI\\EmployeeManagerAPI.csproj",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\React\\Clalit\\ProjectHome\\backend\\EmployeeManagerAPI\\EmployeeManagerAPI.csproj",
+              "RelativeToolTip": "EmployeeManagerAPI\\EmployeeManagerAPI.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-11-14T10:59:05.625Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
