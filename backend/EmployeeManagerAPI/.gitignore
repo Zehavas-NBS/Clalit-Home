@@ -1,0 +1,35 @@
+# Build Results
+bin/
+obj/
+*.dll
+*.exe
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+
+# Logs
+*.log
+Logs/
+
+# IDE files
+.vscode/
+.idea/
+*.sln.docstates
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Configurations
+appsettings.Development.json
+secrets.json
+
+# Git folders
+*.orig
+
+# Dependencies
+packages/
+.nuget/
+project.lock.json
