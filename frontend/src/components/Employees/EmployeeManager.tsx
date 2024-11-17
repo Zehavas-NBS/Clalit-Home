@@ -4,11 +4,19 @@ import EmployeeForm from "./EmployeeForm";
 import { Employee } from "../../types";
 import axios from "axios"; 
 import { useAuth } from "../../AuthContext";
+import "./EmployeeManager.css";
+
 
 const EmployeeManager =() => {
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);
+
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
+  const [selectedEmployee1, setSelectedEmployee1] = useState<Employee | null>(null);
+
   const { currentManager, logout } = useAuth();
+  const [searchTerm, setSearchTerm] = useState("");
+
 
   useEffect(() => {
     const fetchEmployees = async () => {
@@ -35,6 +43,27 @@ const EmployeeManager =() => {
     };
     fetchEmployees();
   }, [currentManager]);
+
+  useEffect(() => {
+    // Filter employees based on the search term
+  const filteredData = employees.filter((employee) =>
+    employee.email?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  setFilteredEmployees(filteredData);
+  }, [employees]);
+
+  useEffect(() => {
+    if(searchTerm === "") 
+      { 
+        setFilteredEmployees(employees);
+        return;
+       }
+    // Filter employees based on the search term
+  const filteredData = employees.filter((employee) =>
+    employee.email?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  setFilteredEmployees(filteredData);
+  }, [searchTerm]);
 
   const handleSave = async (employee: Employee, isNew : boolean) => {
     if (employee.id) {
@@ -119,24 +148,43 @@ const EmployeeManager =() => {
     setSelectedEmployee(null);
   };
 
+
+  
+
   return (
-    <div>
+    <div className="employee-manager">
+      <h1 className="header">Employee Manager</h1>
       {selectedEmployee ? (
+          <div className="employee-form-container">
         <EmployeeForm
           employee={selectedEmployee}
           onSave={handleSave}
           onCancel={handleCancel}
         />
+        </div>
       ) : (
         <>
+          <div className="employee-list-container">
+              {/* Search Input */}
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Search by name..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="search-input"
+            />
+          </div>
           <EmployeeList
-            employees={employees}
+            employees={filteredEmployees}
             onSelect={setSelectedEmployee}
             onDelete={handleDelete}
           />
-          <button onClick={() => setSelectedEmployee({ id: "", name: "", email: "" })}>
+         
+          <button  className="add-employee-button" onClick={() => setSelectedEmployee({ id: "", name: "", email: "" })}>
             Add Employee
           </button>
+          </div>
         </>
       )}
     </div>

@@ -1,0 +1,58 @@
+.employee-form {
+    padding: 20px;
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .employee-form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .employee-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .employee-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .form-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .save-button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .save-button:hover {
+    background: #218838;
+  }
+  
+  .cancel-button {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+  }
+/* transition: background 0.3s ease; */
+  .cancel-button:hover {
+    background: #c82333;
+  }
+  

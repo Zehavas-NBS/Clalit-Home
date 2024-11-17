@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Employee } from "../../types";
+import "./EmployeeForm.css";
+
 
 interface EmployeeFormProps {
   employee?: Employee;
@@ -25,7 +27,7 @@ const EmployeeForm=  ({ employee, onSave, onCancel }: EmployeeFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="employee-form" onSubmit={handleSubmit}>
       <h2>{employee ? "Edit Employee" : "Add New Employee"}</h2>
       <label>
         Name:
@@ -45,10 +47,13 @@ const EmployeeForm=  ({ employee, onSave, onCancel }: EmployeeFormProps) => {
           required
         />
       </label>
-      <button type="submit">Save</button>
-      <button type="button" onClick={onCancel}>
-        Cancel
-      </button>
+      <div className="form-buttons">
+
+        <button type="submit">Save</button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
     </form>
   );
 };

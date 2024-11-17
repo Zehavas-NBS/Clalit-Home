@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Employee } from "../../types";
+import "./EmployeeList.css";
 
 interface EmployeeListProps {
   employees: Employee[];
@@ -22,22 +23,21 @@ const EmployeeList = ({ employees, onSelect, onDelete } : EmployeeListProps) => 
     }
 
   return (
-    <div>
+    <div className="employee-list">
       <h2>Employee List</h2>
       <ul >
         {employees.map((employee) => (
-          <li key={employee.id}
-          style={{
-            padding: "10px",
-            backgroundColor:
-              employee.id === selectedEmployeeId ? "#f0f8ff" : "transparent",
-            border: employee.id === selectedEmployeeId ? "1px solid #000" : "",
-          }}>
+          <li  key={employee.id}   className={`employee-item ${
+            employee.id === selectedEmployeeId ? "selected" : ""
+          }`}
+        >
             <span>
               {employee.name} ({employee.email})
             </span>
+            <div className="actions">
             <button onClick={() => select(employee)}>Edit</button>
             <button onClick={() => onDeleted(employee.id)}>Delete</button>
+            </div>
           </li>
         ))}
       </ul>
