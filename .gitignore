@@ -27,3 +27,9 @@ yarn-error.log*
 .vs/
 .idea/
 *.suo
+/*.sln
+*.swp
+obj/
+bin/
+
+
