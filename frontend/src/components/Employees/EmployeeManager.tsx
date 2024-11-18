@@ -160,6 +160,7 @@ const EmployeeManager =() => {
           employee={selectedEmployee}
           onSave={handleSave}
           onCancel={handleCancel}
+          readOnly={false}
         />
         </div>
       ) : (

@@ -65,7 +65,13 @@ const LogIn = ( props: { onLogIn: (token: string) => void } ) => {
             required
           />
         </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && 
+        <div>
+          <p style={{ color: "red" }}>{error}</p>
+          <p>New manager? Sign up</p>
+          <button type="button" onClick={() => window.location.href = "/signup"}>Sign Up</button>
+        </div>
+        }
         <button type="submit">Log In</button>
       </form>
     </div>

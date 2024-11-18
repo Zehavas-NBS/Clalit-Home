@@ -3,7 +3,8 @@
     background: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-  }
+    display: flex;
+    flex-direction: row;}
   
   .employee-list h2 {
     margin-bottom: 15px;

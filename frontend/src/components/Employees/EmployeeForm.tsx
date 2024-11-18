@@ -3,13 +3,14 @@ import { Employee } from "../../types";
 import "./EmployeeForm.css";
 
 
-interface EmployeeFormProps {
-  employee?: Employee;
-  onSave: (employee: Employee, isNew : boolean) => void;
-  onCancel: () => void;
-}
+// interface EmployeeFormProps {
+//   employee?: Employee;
+//   readOnly: boolean;
+//   onSave: (employee: Employee, isNew : boolean) => void;
+//   onCancel: () => void;
+// }
 
-const EmployeeForm=  ({ employee, onSave, onCancel }: EmployeeFormProps) => {
+const EmployeeForm=  ({ employee, onSave, onCancel , readOnly} : any) => {
   const [name, setName] = useState<string>(employee?.name || "");
   const [email, setEmail] = useState<string>(employee?.email || "");
   const [isNew] = useState<boolean>(employee?.id === undefined);
@@ -27,15 +28,19 @@ const EmployeeForm=  ({ employee, onSave, onCancel }: EmployeeFormProps) => {
   };
 
   return (
-    <form className="employee-form" onSubmit={handleSubmit}>
-      <h2>{employee ? "Edit Employee" : "Add New Employee"}</h2>
+    <form className="employee-form" onSubmit={handleSubmit} >
+      {
+      !readOnly?  <h2>{employee ? "Edit Employee" : "Add New Employee"}</h2> : <h2>{employee ? "Employee Details" : "Add New Employee"}</h2>
+      }
       <label>
         Name:
         <input
           type="text"
+          
           value={name}
           onChange={(e) => setName(e.target.value)}
-          required
+          readOnly={readOnly} // במצב קריאה בלבד, השדה לא ניתן לעריכה
+          required={!readOnly}
         />
       </label>
       <label>
@@ -44,16 +49,18 @@ const EmployeeForm=  ({ employee, onSave, onCancel }: EmployeeFormProps) => {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
+          readOnly={readOnly} // במצב קריאה בלבד, השדה לא ניתן לעריכה
+          required={!readOnly}
         />
       </label>
-      <div className="form-buttons">
+      {!readOnly && <div className="form-buttons">
 
         <button type="submit">Save</button>
         <button type="button" onClick={onCancel}>
           Cancel
         </button>
       </div>
+  }
     </form>
   );
 };

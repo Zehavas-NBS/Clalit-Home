@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import PasswordInput from './Common/PasswordInput';
 //import { SignupRequest } from '../types/api';
 
 const SignUp = () => {
@@ -9,6 +10,14 @@ const SignUp = () => {
     password: '',
   });
   const [message, setMessage] = useState<string>('');
+
+  const [password, setPassword] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
+
+  const handlePasswordChange = (newPassword: string, validationError: string) => {
+    setFormData({ ...formData, password: newPassword });
+    setPasswordError(validationError);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,7 +31,9 @@ const SignUp = () => {
        await axios.post('http://localhost:5009/api/Auth/signup', formData).
       then((res) => result = res.data);
       setMessage('Signup successful! You can now log in.');
-    } catch (error: unknown) {
+      window.location.href = '/login';
+    } 
+    catch (error: unknown) {
       console.error(error);
       setMessage('Signup failed. Please try again.');
     }
@@ -51,16 +62,11 @@ const SignUp = () => {
           required
         />
       </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-      </label>
+      <PasswordInput
+        value={formData.password}
+        onChange={handlePasswordChange}
+        label="Password"
+      />
       <button type="submit">Sign Up</button>
       {message && <p>{message}</p>}
     </form>
