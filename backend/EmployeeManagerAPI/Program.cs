@@ -3,9 +3,16 @@ using EmployeeManagerAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using log4net;
+using log4net.Config;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+// אתחול log4net מהגדרות הקובץ appsettings.json
+XmlConfigurator.Configure(new FileInfo("log4net.config"));
+builder.Logging.AddProvider(new Log4NetProvider("log4net.config"));  // הוסף את קובץ הקונפיגורציה
+
 
 builder.Services.AddCors(options =>
 {

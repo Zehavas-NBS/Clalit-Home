@@ -1,128 +1,173 @@
-# Employee Management System
-# Introduction
-This is a full-stack Employee Management System built with:
 
-Backend: ASP.NET Core
-Frontend: React.js
-Database: SQLite
-The system includes the following features:
 
-User authentication using JWT.
-CRUD operations for managing employees.
-Role-based access (manager and employees).
+# Employee Manager Application
 
-# Technologies Used
-Backend:
-ASP.NET Core
-Entity Framework Core
-JWT Authentication
-Frontend:
-React.js
-Axios for API communication
-Database:
-SQLite (can be replaced with SQL Server if needed)
-# Setup and Installation
-Prerequisites
-## Backend Requirements:
-.NET 6 SDK
-SQLite (or SQL Server for production)
-Visual Studio or any text editor with .NET Core support
-## Frontend Requirements:
-Node.js (v14 or later)
-npm (comes with Node.js)
+This is a full-stack Employee Manager application built using **.NET Core** for the backend API and **React** for the frontend. The application allows managers to register, login, and manage their employees.
 
-## 1. Backend Setup
-### 1. Clone the repository:
+## Requirements
 
-git clone https://github.com/Zehavas-NBS/Clalit-Home
-cd <backend_project_folder>
-### 2. Install dependencies:
+Before running the application, ensure that you have the following installed on your system:
 
-dotnet restore
+- **.NET SDK 8** (or the version you are using)
+  - [Download .NET SDK](https://dotnet.microsoft.com/download)
+- **Node.js** and **npm** (for the React frontend)
+  - [Download Node.js](https://nodejs.org/)
+- **SQLite** or **SQL Server** for the database (you can use SQLite for simplicity)
+  - [Download SQLite](https://www.sqlite.org/download.html) (if using SQLite)
+- **Visual Studio Code** (or any preferred code editor)
+  - [Download Visual Studio Code](https://code.visualstudio.com/)
 
-### 3.Configure database connection in appsettings.json:
+## Setting Up the Backend API (Server-side)
 
-{
-    "ConnectionStrings": {
-        "DefaultConnection": "Data Source=EmployeeManager.db"
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/Zehavas-NBS/Clalit-Home
+   cd ProjectHome
+   ```
+
+2. **Navigate to the `Server` folder:**
+
+   ```bash
+   cd backend
+   ```
+
+3. **Restore dependencies:**
+
+   To restore the required packages for the backend API, run:
+
+   ```bash
+   dotnet restore
+   ```
+
+4. **Configure the Database:**
+
+   In the case of SQLite, you don't need a separate SQL Server instance, but ensure that your `appsettings.json` is configured for SQLite. Here's an example of what the connection string might look like in `appsettings.json`:
+
+   ```json
+   "ConnectionStrings": {
+     "DefaultConnection": "Data Source=app.db"
+   }
+   ```
+
+   This will create the `app.db` SQLite database file in the root directory when you run the application.
+
+5. **Run the Migrations:**
+
+   ```bash
+   dotnet ef database update
+   ```
+
+   This will generate the database schema based on your `DbContext`.
+
+6. **Run the Backend API:**
+
+   Start the backend API server using:
+
+   ```bash
+   dotnet run
+   ```
+
+   The application should be running on [http://localhost:5009](http://localhost:5000).
+
+## Setting Up the Frontend (Client-side)
+
+1. **Navigate to the `Client` folder:**
+
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies:**
+
+   To install the necessary packages for the React frontend, run:
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the Frontend:**
+
+   Start the frontend application using:
+
+   ```bash
+   npm start
+   ```
+
+   This will run the frontend on [http://localhost:3001](http://localhost:3001).
+
+## Running the Application
+
+Once both the backend API and frontend are running:
+
+- **Backend (API)**: [http://localhost:5009](http://localhost:5009) (default for ASP.NET Core).
+- **Frontend (React app)**: [http://localhost:3001](http://localhost:3001).
+
+### Test the API
+
+You can test the API endpoints using tools like **Postman** or **cURL**. Below are the common API endpoints:
+
+- `POST /api/auth/signup`: Register a new manager.
+  - Request body: `{ "email": "manager@example.com", "password": "YourPassword123", "fullName": "John Doe" }`
+- `POST /api/auth/login`: Log in and obtain a JWT token.
+  - Request body: `{ "email": "manager@example.com", "password": "YourPassword123" }`
+- `GET /api/Employees/getEmployeesByManagerId`: Get employees for the currently logged-in manager (requires JWT).
+
+### Example API Request Using cURL (Login)
+
+```bash
+curl -X POST "http://localhost:5000/api/auth/login" -H "Content-Type: application/json" -d '{"email":"manager@example.com","password":"YourPassword123"}'
+```
+
+This will return a JWT token, which can be used for further authenticated API requests (e.g., fetching employees).
+
+### Example API Request Using cURL (Fetch Employees)
+
+```bash
+curl -X GET "http://localhost:5000/api/employees/my-employees" -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+---
+
+## Project Structure
+
+The project consists of two main parts:
+
+- **Server (Backend)**
+  - Handles API requests and database operations.
+  - Located in the `Server` directory.
+- **Client (Frontend)**
+  - Built with React and communicates with the API.
+  - Located in the `Client` directory.
+
+---
+
+## Additional Features
+
+- **Authentication with JWT**: Used for secure login and access control.
+- **Manager-Employee relationship**: Only managers can manage their own employees.
+- **CRUD operations**: Managers can add, update, view, and delete employees.
+
+---
+
+## Troubleshooting
+
+- **Port already in use**: If you encounter a port conflict (e.g., "port 5000 is already in use"), you can change the port in the `launchSettings.json` or the `appsettings.json` file.
+  
+  Example for changing the port in `appsettings.json`:
+  ```json
+  "Kestrel": {
+    "Endpoints": {
+      "Http": {
+        "Url": "http://localhost:5001"
+      }
     }
-}
-### 4.Apply migrations to create the database:
+  }
+  ```
 
-dotnet ef database update
-### 5.Run the backend server:
+- **JWT Authentication**: Ensure you are sending the JWT token in the `Authorization` header for endpoints that require authentication.
 
-dotnet run
-# The backend will be available at http://localhost:5009.
-2. Frontend Setup
-  ## 2.1 Clone the repository:
-  git clone https://github.com/Zehavas-NBS/Clalit-Home
-  cd <frontend_project_folder>
-  ## 2.2 Install dependencies:
-  npm install
-  If you want change ports in .env file in the root directory of the frontend project:
-  PORT=3001
-  REACT_APP_API_URL=http://localhost:5009/api
-  ### Run the React application:
-  npm start
-  The frontend will be available at http://localhost:3001.
-#### Usage
-Access the frontend at http://localhost:3001.
-Use the Sign Up page to create a new manager account.
-Log in using the manager account.
-Add, update, or delete employees.
-Each API call will be authorized using the JWT returned during login.
-API Endpoints
-Authentication
-POST /api/Auth/login
+---
 
-Request:
-json
-Copy code
-{
-  "email": "manager@example.com",
-  "password": "your_password"
-}
-Response:
-json
-Copy code
-{
-  "token": "JWT_TOKEN",
-  "managerData": { ... }
-}
-POST /api/Auth/signup
 
-Request:
-json
-Copy code
-{
-  "email": "newmanager@example.com",
-  "password": "your_password",
-  "fullName": "John Doe"
-}
-Employees
-GET /api/Employees/getEmployeesByManagerId
-
-Headers:
-Authorization: Bearer JWT_TOKEN
-POST /api/Employees/add
-
-Request:
-json
-Copy code
-{
-  "fullName": "Jane Smith",
-  "email": "jane.smith@example.com",
-  "password": "password123"
-}
-PUT /api/Employees/update
-
-Request:
-json
-Copy code
-{
-  "id": "employee_id",
-  "fullName": "Jane Smith Updated"
-}
-DELETE /api/Employees/delete/{id}
-
+This README should help you get the app up and running locally. If you have further questions or need clarification on any of the steps, feel free to ask!

@@ -2,6 +2,7 @@ using EmployeeManagerAPI.Data;
 using EmployeeManagerAPI.Models;
 using EmployeeManagerAPI.Models.Requests;
 using EmployeeManagerAPI.Services;
+using log4net;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,30 +15,46 @@ namespace EmployeeManagerAPI.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        //private readonly AppDbContext _context;
-
-        //public ManagersController(AppDbContext context)
-        //{
-        //    _context = context;
-        //}
+       
+        private readonly ILog _logger;
 
         private readonly AuthService _authService;
 
         public AuthController(AuthService authService)
         {
+            _logger = LogManager.GetLogger(typeof(AuthController));
             _authService = authService;
         }
         [HttpPost("signup")]
-        public async Task<IActionResult> SignUp([FromBody] ManagerSignupRequest user)
+        public async Task<IActionResult> SignUp([FromBody] ManagerSignupRequest signupRequest)
         {
             try
             {
-                var token = await _authService.SignUpAsync(user);
-                return Ok();
+                _logger.Info("Signup request received.");
+
+                if (signupRequest == null)
+                {
+                    _logger.Warn("Signup request body is null.");
+                    return BadRequest(new { error = "Invalid signup data." });
+                }
+                var result = await _authService.SignUpAsync(signupRequest);
+                if (result == null)
+                {
+                    _logger.Warn("Signup failed.");
+                    return BadRequest(new { error = "Signup failed. Please try again." });
+                }
+                _logger.Info($"Signup successful for user: {signupRequest.Email}");
+                return CreatedAtAction(nameof(SignUp), new { id = result.Id }, result);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.Error("Error occurred during signup.", ex);
+                return StatusCode(500, new { error = string.Format("An error occurred while processing the signup request.{0}",ex.Message) });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                _logger.Error("Error occurred during signup.", ex);
+                return StatusCode(500, new { error = "An error occurred while processing the signup request." });
             }
         }
 
@@ -46,72 +63,31 @@ namespace EmployeeManagerAPI.Controllers
         {
             try
             {
-                var response = await _authService.LoginAsync(request);
-                return Ok(new { response.Token ,response.ManagerData });
+                _logger.Info("Login request received.");
+
+                if (request == null)
+                {
+                    _logger.Warn("Login request body is null.");
+                    return BadRequest(new { error = "Invalid login data." });
+                }
+
+                var result = await _authService.LoginAsync(request);
+                if (result == null)
+                {
+                    _logger.Warn("Invalid login credentials provided.");
+                    return Unauthorized(new { error = "Invalid email or password." });
+                }
+
+                _logger.Info($"Login successful for user: {request.Email}");
+
+                return Ok(new { result.Token , result.ManagerData });
             }
-            catch (UnauthorizedAccessException)
-            {
-                return Unauthorized("Invalid email or password");
-            }
+          
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                _logger.Error("Error occurred during login.", ex);
+                return StatusCode(500, new { error = "An error occurred while processing the login request." });
             }
-        }
-
-  
-
-
-        //[HttpPost("signup")]
-        //public async Task<IActionResult> Signup([FromBody] ManagerSignupRequest request)
-        //{
-        //    // 1. Validate input
-        //    if (string.IsNullOrEmpty(request.FullName) ||
-        //        string.IsNullOrEmpty(request.Email) ||
-        //        string.IsNullOrEmpty(request.Password))
-        //    {
-        //        return BadRequest("All fields are required.");
-        //    }
-
-        //    if (!request.Email.Contains("@"))
-        //    {
-        //        return BadRequest("Invalid email format.");
-        //    }
-
-        //    // 2. Check if manager already exists
-        //    var existingManager = await _context.Managers
-        //        .FirstOrDefaultAsync(m => m.Email == request.Email);
-
-        //    if (existingManager != null)
-        //    {
-        //        return Conflict("A manager with this email already exists.");
-        //    }
-
-        //    // 3. Hash the password
-        //    var hashedPassword = HashPassword(request.Password);
-
-        //    // 4. Create new manager
-        //    var manager = new Manager
-        //    {
-        //        FullName = request.FullName,
-        //        Email = request.Email,
-        //        Password = hashedPassword,
-        //        CreatedAt = DateTime.UtcNow
-        //    };
-
-        //    _context.Managers.Add(manager);
-        //    await _context.SaveChangesAsync();
-
-        //    return Ok("Manager registered successfully.");
-        //}
-
-        //private string HashPassword(string password)
-        //{
-        //    using (var sha256 = SHA256.Create())
-        //    {
-        //        var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-        //        return Convert.ToBase64String(hashedBytes);
-        //    }
-        //}
+        } 
     }
 }

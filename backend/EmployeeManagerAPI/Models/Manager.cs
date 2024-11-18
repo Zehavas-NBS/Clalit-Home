@@ -1,10 +1,17 @@
 ﻿namespace EmployeeManagerAPI.Models
 {
     using System.Collections.Generic;
+    using System.Text.Json.Serialization;
 
-    public class Manager : BaseEntity
+    public class Manager : EmployeeBase
     {
-        public ICollection<Employee> Employees { get; set; } = new List<Employee>(); // רשימת העובדים תחת המנהל
+        public Manager(string email, string fullName, string password) : base(email, fullName, password)
+        {
+        }
+
+        [JsonIgnore]
+
+        public ICollection<Employee> Employees { get; set; } = new List<Employee>();
     }
 
 }

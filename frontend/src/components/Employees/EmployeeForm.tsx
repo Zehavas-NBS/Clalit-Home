@@ -11,34 +11,37 @@ import "./EmployeeForm.css";
 // }
 
 const EmployeeForm=  ({ employee, onSave, onCancel , readOnly} : any) => {
-  const [name, setName] = useState<string>(employee?.name || "");
+  const [fullName, setFullName] = useState<string>(employee?.fullName || "");
   const [email, setEmail] = useState<string>(employee?.email || "");
   const [isNew] = useState<boolean>(employee?.id === undefined);
 
   useEffect(() => {
     if (employee) {
-      setName(employee.name ?? "");
+      setFullName(employee.fullName ?? "");
       setEmail(employee.email ?? "");
     }
   }, [employee]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave({ ...employee, name, email, id: employee?.id || "" }, isNew);
+    const a = {...employee, fullName, email, id: employee?.id || ""};
+    console.log(a);
+    console.log(employee);
+    onSave({ ...employee, fullName, email, id: employee?.id || "" }, isNew);
   };
 
   return (
     <form className="employee-form" onSubmit={handleSubmit} >
       {
-      !readOnly?  <h2>{employee ? "Edit Employee" : "Add New Employee"}</h2> : <h2>{employee ? "Employee Details" : "Add New Employee"}</h2>
+      !readOnly?  <h2>{employee ? "Edit Employee" : "Add New Employee"}</h2> : <h2>{"Employee Details"}</h2>
       }
       <label>
         Name:
         <input
           type="text"
           
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
           readOnly={readOnly} // במצב קריאה בלבד, השדה לא ניתן לעריכה
           required={!readOnly}
         />

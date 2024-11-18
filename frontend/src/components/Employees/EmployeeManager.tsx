@@ -68,7 +68,7 @@ const EmployeeManager =() => {
   const handleSave = async (employee: Employee, isNew : boolean) => {
     if (employee.id) {
       try {
-
+console.log(employee);
         const response = await axios.put(
             `http://localhost:5009/api/Employees/update/${employee.id}`,
             {
@@ -138,6 +138,7 @@ const EmployeeManager =() => {
       if (response.status.toString() === "200") {
         setEmployees((prev) => prev.filter((e) => e.id !== id));
       } 
+      setSelectedEmployee(null);
     } catch (err) {
       //setError("Invalid email or password.");
     }
@@ -174,6 +175,7 @@ const EmployeeManager =() => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
+              style={{ width: "30%" }}
             />
           </div>
           <EmployeeList
@@ -182,7 +184,7 @@ const EmployeeManager =() => {
             onDelete={handleDelete}
           />
          
-          <button  className="add-employee-button" onClick={() => setSelectedEmployee({ id: "", name: "", email: "" })}>
+          <button  className="add-employee-button" onClick={() => setSelectedEmployee({ id: "", fullName: "", email: "", password:"" })}>
             Add Employee
           </button>
           </div>

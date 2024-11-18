@@ -2,6 +2,8 @@
 using EmployeeManagerAPI.Models;
 using EmployeeManagerAPI.Models.Requests;
 using EmployeeManagerAPI.Models.Responses;
+using EmployeeManagerAPI.Validations;
+using log4net;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,125 +18,126 @@ namespace EmployeeManagerAPI.Services
     {
         private readonly IConfiguration _configuration;
         private readonly AppDbContext _context;
+        private readonly ILog _logger;
+
 
         public AuthService(IConfiguration configuration, AppDbContext context)
         {
+            _logger = LogManager.GetLogger(typeof(AuthService));
+
             _configuration = configuration;
             _context = context;
         }
 
-        public async Task<string> SignUpAsync(ManagerSignupRequest request)
+        public async Task<IEmployee> SignUpAsync(ManagerSignupRequest request)
         {
-            // בדיקת אם הדוא"ל כבר קיים
-            var existingUser = await _context.Managers.FirstOrDefaultAsync(u => u.Email == request.Email);
-            if (existingUser != null)
+            try
             {
-                throw new Exception("Email is already in use");
-            }
+                _logger.Info($"Starting registration for email: {request.Email}");
 
-            // 3. Hash the password
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
+                // Validate email format
+                if (string.IsNullOrWhiteSpace(request.Email) || !ValidationHelper.IsValidEmail(request.Email))
+                {
+                    _logger.Warn($"Invalid email format: {request.Email}");
+                    throw new ArgumentException(ErrorMessages.InvalidEmail);
+                }
 
-            // 3. Hash the password
-           // var hashedPassword = HashPassword(request.Password);
+                // Validate password strength
+                if (string.IsNullOrWhiteSpace(request.Password) || !ValidationHelper.IsValidPassword(request.Password))
+                {
+                    _logger.Warn($"Weak or invalid password provided for email: {request.Email}");
+                    throw new ArgumentException(ErrorMessages.InvalidPassword);
+                }
 
-            // 4. Create new manager
-            var manager = new Manager
-            {
-                FullName = request.FullName,
-                Email = request.Email,
-                Password = hashedPassword,
-                CreatedAt = DateTime.UtcNow
-            };
-            // יצירת עובדים ברירת מחדל
-            var defaultEmployees = new List<Employee>
+                // Validate full name
+                if (string.IsNullOrWhiteSpace(request.FullName) || request.FullName.Length < 2)
+                {
+                    _logger.Warn($"Invalid full name provided: {request.FullName}");
+                    throw new ArgumentException(ErrorMessages.InvalidFullName);
+
+                }
+                // בדיקת אם הדוא"ל כבר קיים
+                var existingUser = await _context.Managers.FirstOrDefaultAsync(u => u.Email == request.Email);
+                if (existingUser != null)
+                {
+                    _logger.Warn($"Email already exists: {request.Email}");
+                    throw new ArgumentException(ErrorMessages.EmailAlreadyExists);
+                }
+
+                // 3. Hash the password
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+            
+
+                // 4. Create new manager
+                var manager = new Manager(request.Email, request.FullName, hashedPassword);
+               
+                // יצירת עובדים ברירת מחדל
+                var defaultEmployees = new List<Employee>
         {
-            new Employee
-            {
-                FullName = "Default Employee 1",
-                Email = "employee1@example.com",
-                Password = BCrypt.Net.BCrypt.HashPassword("password1"), // Hash לסיסמה
-                ManagerId = manager.Id
-            },
-            new Employee
-            {
-                FullName = "Default Employee 2",
-                Email = "employreqree2@example.com",
-                Password = BCrypt.Net.BCrypt.HashPassword("password2"), // Hash לסיסמה
-                ManagerId = manager.Id
-            },
-             new Employee
-            {
-                FullName = "Default Employee 3",
-                Email = "employereqwrwee1@example.com",
-                Password = BCrypt.Net.BCrypt.HashPassword("password1"), // Hash לסיסמה
-                ManagerId = manager.Id
-            },
-            new Employee
-            {
-                FullName = "Default Employee 4",
-                Email = "employereqrqwe2@example.com",
-                Password = BCrypt.Net.BCrypt.HashPassword("password2"), // Hash לסיסמה
-                ManagerId = manager.Id
-            },
-             new Employee
-            {
-                FullName = "Default Employee 5",
-                Email = "emplqerqweroyee1@example.com",
-                Password = BCrypt.Net.BCrypt.HashPassword("password1"), // Hash לסיסמה
-                ManagerId = manager.Id
-            },
-            new Employee
-            {
-                FullName = "Default Employee 6",
-                Email = "employeerqewe2@example.com",
-                Password = BCrypt.Net.BCrypt.HashPassword("password2"), // Hash לסיסמה
-                ManagerId = manager.Id
-            }
+            new Employee("employee1@example.com",  "Default Employee 1",BCrypt.Net.BCrypt.HashPassword("password1"),manager.Id),
+            new Employee("employreqree2@example.com", "Default Employee 2",BCrypt.Net.BCrypt.HashPassword("password2"),manager.Id),
+             new Employee("employee1@example.com",  "Default Employee 3",BCrypt.Net.BCrypt.HashPassword("password1"),manager.Id),
+            new Employee("employreqree2@example.com", "Default Employee 4",BCrypt.Net.BCrypt.HashPassword("password2"),manager.Id),
+             new Employee("employee1@example.com",  "Default Employee 5",BCrypt.Net.BCrypt.HashPassword("password1"),manager.Id),
+            new Employee("employreqree2@example.com", "Default Employee 6",BCrypt.Net.BCrypt.HashPassword("password2"),manager.Id)
         };
 
-            // הוספת המנהל והעובדים ל-DB
-            manager.Employees = defaultEmployees;
-           // _dbContext.Managers.Add(manager);
-            // הוספת המשתמש החדש לבסיס הנתונים
-            await _context.Managers.AddAsync(manager);
-            await _context.SaveChangesAsync();
+                // הוספת המנהל והעובדים ל-DB
+                manager.Employees = defaultEmployees;
+                // _dbContext.Managers.Add(manager);
+                // הוספת המשתמש החדש לבסיס הנתונים
+                await _context.Managers.AddAsync(manager);
+                await _context.SaveChangesAsync();
+                _logger.Info($"User registered successfully with email: {request.Email}");
 
-            // החזרת טוקן JWT למקרה הצורך
-            return "true";
-        }
-
-        private string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
+                // החזרת טוקן JWT למקרה הצורך
+                return manager;
+            }
+            catch (Exception ex)
             {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(hashedBytes);
+                _logger.Error($"Error during registration for email: {request.Email}", ex);
+                throw;
             }
         }
 
-        public async Task<LoginResponse> LoginAsync(LoginRequest user)
+        public async Task<LoginResponse> LoginAsync(LoginRequest request)
         {
-            Console.WriteLine(user);
-            var existingUser = await _context.Managers.FirstOrDefaultAsync(u => u.Email == user.Email);
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
-
-            if (existingUser == null || !BCrypt.Net.BCrypt.Verify(user.Password, hashedPassword))
+            try
             {
-                throw new UnauthorizedAccessException("Invalid email or password");
+                _logger.Info($"Authenticating user with email: {request.Email}");
+
+                var existingUser = await _context.Managers.FirstOrDefaultAsync(u => u.Email == request.Email);
+
+                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
+
+                if (existingUser == null || !BCrypt.Net.BCrypt.Verify(request.Password, existingUser.Password))
+                {
+                    _logger.Warn($"Authentication failed for email: {request.Email}");
+
+                    return null;
+                }
+
+                var token = GenerateJwtToken(existingUser);
+                _logger.Info($"Authentication successful for email: {request.Email}");
+                return new LoginResponse(token, existingUser);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error during authentication for email: {request.Email}", ex);
+                throw;
             }
 
-            return new LoginResponse(GenerateJwtToken(existingUser), existingUser);
         }
 
-        private string GenerateJwtToken(BaseEntity user)
+        private string GenerateJwtToken(IEmployee user)
         {
             var claims = new[]
             {
             new Claim(ClaimTypes.Name, user.Email),
             new Claim(JwtRegisteredClaimNames.Sub, user.Email),
             new Claim(JwtRegisteredClaimNames.Jti, (user.Id).ToString())
-            
+
         };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YourSuperSecretKeyWithEnoughLength384Bits"));

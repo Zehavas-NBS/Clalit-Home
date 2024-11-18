@@ -22,19 +22,16 @@ const EmployeeList = ({ employees, onSelect, onDelete } : EmployeeListProps) => 
   }
   const onDeleted = (employee : Employee) =>
     {
+      const confirmDelete = window.confirm("Are you sure you want to delete this employee?");
+    if (!confirmDelete) {
+      return; // Exit if user cancels the confirmation dialog
+    }
       setSelectedEmployee(employee);
       onDelete(employee.id);
     }
-// // דוגמת נתונים (למשל רשימת עובדים)
-// const rows = [
-//   { id: 1, name: 'John Doe', email: 'john@example.com' },
-//   { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-//   { id: 3, name: 'Bob Johnson', email: 'bob@example.com' },
-// ];
-    // העמודות שיכללו את כפתורי העריכה והמחיקה
 const columns = [
   { field: 'id', headerName: 'ID', width: 150 },
-  { field: 'name', headerName: 'Name', width: 200 },
+  { field: 'fullName', headerName: 'Name', width: 200 },
   { field: 'email', headerName: 'Email', width: 250 },
   {
     field: 'actions',
@@ -72,46 +69,20 @@ const handleRowSelection = (rowSelectionModel: GridRowSelectionModel, details: G
   }
 };
 
-// // פונקציות לטיפול בכפתורים
-// const handleEdit = (emp: Employee) => {
-//   select(emp);
-//   // כאן תוכל להוסיף לוגיקה לפתיחת עורך עבור אותו עובד
-// };
-
-// const handleDelete = (id: string) => {
-//   onDeleted(id);
-//   // כאן תוכל להוסיף לוגיקה למחיקת העובד
-// };
 
   return (
     <div className="employee-list">
       <DataGrid rows={employees} 
       columns={columns} 
-      onRowSelectionModelChange={handleRowSelection} // אירוע מעקב אחרי בחירה
+      onRowSelectionModelChange={handleRowSelection}
 
       />
-      {selectedEmployee ?   
+      {   
       <EmployeeForm
           employee={selectedEmployee}
           readOnly={true}
-        /> : null
+        /> 
       }
-      {/* <ul >
-        {employees.map((employee) => (
-          <li  key={employee.id}   className={`employee-item ${
-            employee.id === selectedEmployeeId ? "selected" : ""
-          }`}
-        >
-            <span>
-              {employee.name} ({employee.email})
-            </span>
-            <div className="actions">
-            <button onClick={() => select(employee)}>Edit</button>
-            <button onClick={() => onDeleted(employee.id)}>Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul> */}
     </div>
   );
 };

@@ -2,6 +2,6 @@
 {
     public class CRUDEmployeeResponse
     {
-        public BaseEntity EmployeeData { get; set; }
+        public IEmployee EmployeeData { get; set; }
     }
 }

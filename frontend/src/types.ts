@@ -1,5 +1,6 @@
 export interface Employee {
     id: string;
-    name: string | undefined;
+    fullName: string | undefined;
     email: string | undefined;
+    password: string | undefined;
   }

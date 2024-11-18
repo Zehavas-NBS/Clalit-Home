@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import PasswordInput from './Common/PasswordInput';
+import './SignUp.css';  // הוספת קובץ ה-CSS
+
 //import { SignupRequest } from '../types/api';
 
 const SignUp = () => {

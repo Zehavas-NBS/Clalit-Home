@@ -2,13 +2,13 @@
 {
     public class LoginResponse
     {
-        public LoginResponse(string token, BaseEntity existingUser)
+        public LoginResponse(string token, IEmployee existingUser)
         {
             Token = token;
             ManagerData = existingUser;
         }
 
         public string Token { get; }
-        public BaseEntity ManagerData { get; }
+        public IEmployee ManagerData { get; }
     }
 }
