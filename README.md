@@ -11,7 +11,7 @@ I use entity framwork - Entity Framework is a great choice for most .NET applica
 ![System Image 6](Readme%20assets/image-6.png)
 ![System Image 8](Readme%20assets/image-8.png)
 ![System Image 4](Readme%20assets/image-4.png)
-![System Image 7](Readme%20assets/image-7.png)
+![System Image 7](Readme%20assets/FullScreen.png)
 ![System Image 2](Readme%20assets/image-2.png)
 
 
