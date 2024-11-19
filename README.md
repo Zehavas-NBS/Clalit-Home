@@ -8,7 +8,6 @@ I use entity framwork - Entity Framework is a great choice for most .NET applica
 ## Screenshot of system
 ![Swagger Authorization](Readme%20assets/swaggerAuth.PNG)
 ![System Image 9](Readme%20assets/image-9.png)
-![System Image 3](Readme%20assets/image-3.png)
 ![System Image 6](Readme%20assets/image-6.png)
 ![System Image 8](Readme%20assets/image-8.png)
 ![System Image 4](Readme%20assets/image-4.png)
