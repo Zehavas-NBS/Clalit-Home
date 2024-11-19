@@ -6,14 +6,14 @@ This is a full-stack Employee Manager application built using **.NET 8** for the
 I use entity framwork - Entity Framework is a great choice for most .NET applications that interact with relational databases. It provides a high-level, developer-friendly API for managing data, reducing complexity, and boosting productivity. 
 
 ## Screenshot of system
-![alt text](image.png)
-![alt text](image-3.png)
-![alt text](image-5.png)
-![alt text](image-6.png)
-![alt text](image-8.png)
-![alt text](image-4.png)
-![alt text](image-7.png)
-![alt text](image-2.png)
+![Swagger Authorization](Readme%20assets/swaggerAuth.PNG)
+![System Image 9](Readme%20assets/image-9.png)
+![System Image 3](Readme%20assets/image-3.png)
+![System Image 6](Readme%20assets/image-6.png)
+![System Image 8](Readme%20assets/image-8.png)
+![System Image 4](Readme%20assets/image-4.png)
+![System Image 7](Readme%20assets/image-7.png)
+![System Image 2](Readme%20assets/image-2.png)
 
 
 
