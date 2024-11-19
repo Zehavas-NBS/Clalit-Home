@@ -57,9 +57,10 @@ Before running the application, ensure that you have the following installed on 
 
    ```bash
    cd EmployeeManagerAPI
-   dotnet ef database update
    dotnet tool install --global dotnet-ef
    dotnet add package Microsoft.EntityFrameworkCore.Tools
+   dotnet ef database update
+
    ```
 
    This will generate the database schema based on your `DbContext`.
@@ -72,7 +73,8 @@ Before running the application, ensure that you have the following installed on 
    dotnet run
    ```
 
-   The application should be running on [http://localhost:5009/swagger/index.html](http://localhost:5009/swagger/index.html).
+   The application should be running on [http://localhost:5009](http://localhost:5009).
+   to open swagger [http://localhost:5009/swagger/index.html](http://localhost:5009/swagger/index.html)
 
 ## Setting Up the Frontend (Client-side)
 
