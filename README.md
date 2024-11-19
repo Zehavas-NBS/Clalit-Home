@@ -15,7 +15,6 @@ I use entity framwork - Entity Framework is a great choice for most .NET applica
 ![System Image 2](Readme%20assets/image-2.png)
 
 
-
 ## Requirements
 
 Before running the application, ensure that you have the following installed on your system:
