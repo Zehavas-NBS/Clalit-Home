@@ -34,7 +34,8 @@ Before running the application, ensure that you have the following installed on 
 
    ```bash
    git clone https://github.com/Zehavas-NBS/Clalit-Home
-   cd ProjectHome
+   cd Clalit-Home
+
    ```
 
 2. **Navigate to the `Server` folder:**
