@@ -1,13 +1,7 @@
-using EmployeeManagerAPI.Data;
-using EmployeeManagerAPI.Models;
 using EmployeeManagerAPI.Models.Requests;
 using EmployeeManagerAPI.Services;
 using log4net;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace EmployeeManagerAPI.Controllers
 {
@@ -59,7 +53,7 @@ namespace EmployeeManagerAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LogInRequest request)
         {
             try
             {

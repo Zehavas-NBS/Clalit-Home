@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../AuthContext";
-import './Login.css'; // import the CSS file
+import './Login.css';
 
 
-interface LogInProps {
-  onLogIn: (token: string) => void;
-}
-
-const LogIn = ( props: { onLogIn: (token: string) => void } ) => {
+const LogIn = (props: { onLogIn: (token: string) => void }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,7 +15,7 @@ const LogIn = ( props: { onLogIn: (token: string) => void } ) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,9 +26,9 @@ const LogIn = ( props: { onLogIn: (token: string) => void } ) => {
       const response = await axios.post("http://localhost:5009/api/Auth/login", formData);
       if (response.data && response.data.token) {
         const { token, managerData } = response.data;
-        localStorage.setItem("authToken", token); // שמירה ב-LocalStorage
-        login(managerData); // עדכון ה-Session  
-        props.onLogIn(token); // עדכון ה-Session
+        localStorage.setItem("authToken", token);
+        login(managerData);
+        props.onLogIn(token);
       } else {
         setError("Invalid response from server.");
       }
@@ -42,7 +38,7 @@ const LogIn = ( props: { onLogIn: (token: string) => void } ) => {
   };
 
   return (
-    <div  className="login-container">
+    <div className="login-container">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -65,19 +61,19 @@ const LogIn = ( props: { onLogIn: (token: string) => void } ) => {
             required
           />
         </div>
-        
+
         <div>
-        {error && 
-        <div className="signUp">  
-          <p style={{ color: "red" }}>{error}</p>
-          <p>New manager? Sign up</p>
-          <button type="button" onClick={() => window.location.href = "/signup"}>Sign Up</button>
+          {error &&
+            <div className="signUp">
+              <p style={{ color: "red" }}>{error}</p>
+              <p>New manager? Sign up</p>
+              <button type="button" onClick={() => window.location.href = "/signup"}>Sign Up</button>
+            </div>
+          }
+          <button type="submit">Log In</button>
         </div>
-        }
-        <button type="submit">Log In</button>
-        </div>
-         <div>
-       
+        <div>
+
         </div>
       </form>
     </div>

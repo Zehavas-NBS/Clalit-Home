@@ -101,7 +101,7 @@ namespace EmployeeManagerAPI.Services
             }
         }
 
-        public async Task<LoginResponse> LoginAsync(LoginRequest request)
+        public async Task<LoginResponse> LoginAsync(LogInRequest request)
         {
             try
             {

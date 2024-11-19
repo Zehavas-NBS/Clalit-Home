@@ -2,21 +2,18 @@
 
 # Employee Manager Application
 
-This is a full-stack Employee Manager application built using **.NET 8** for the backend API and **React** for the frontend. The application allows managers to register, login, and manage their employees.
+This is a full-stack Employee Manager application built using **.NET 8** for the backend API, **SQLite** for db, and **React** for the frontend.  The application allows managers to register, login, and manage their employees.
+I use entity framwork - Entity Framework is a great choice for most .NET applications that interact with relational databases. It provides a high-level, developer-friendly API for managing data, reducing complexity, and boosting productivity. 
 
-## Print screen of system
-![alt text](image-9.png)
+## Screenshot of system
+![alt text](image.png)
+![alt text](image-3.png)
 ![alt text](image-5.png)
 ![alt text](image-6.png)
 ![alt text](image-8.png)
 ![alt text](image-4.png)
-
-![alt text](image-1.png)
-
+![alt text](image-7.png)
 ![alt text](image-2.png)
-
-
-
 
 
 
@@ -107,6 +104,8 @@ Once both the backend API and frontend are running:
 
 - **Backend (API)**: [http://localhost:5009](http://localhost:5009) (default for ASP.NET Core).
 - **Frontend (React app)**: [http://localhost:3001](http://localhost:3001).
+- **Swagger**: [http://localhost:5009/swagger/index.html](http://localhost:5009/swagger/index.html).
+  - in swagger you can send the token that you got from login response and put it in "Authorize" button for all the next request..
 
 ### Test the API
 
@@ -155,29 +154,10 @@ The project consists of two main parts:
 ## Additional Features
 
 - **Authentication with JWT**: Used for secure login and access control.
-- **Manager-Employee relationship**: Only managers can manage their own employees.
 - **CRUD operations**: Managers can add, update, view, and delete employees.
-
+- **Log4net**: Log every request.
+- **Swagger**
+- **Material UI**: Used to increase options in React 
 ---
 
-## Troubleshooting
-
-- **Port already in use**: If you encounter a port conflict (e.g., "port 5000 is already in use"), you can change the port in the `launchSettings.json` or the `appsettings.json` file.
-  
-  Example for changing the port in `appsettings.json`:
-  ```json
-  "Kestrel": {
-    "Endpoints": {
-      "Http": {
-        "Url": "http://localhost:5001"
-      }
-    }
-  }
-  ```
-
-- **JWT Authentication**: Ensure you are sending the JWT token in the `Authorization` header for endpoints that require authentication.
-
----
-
-
-This README should help you get the app up and running locally. If you have further questions or need clarification on any of the steps, feel free to ask!
+- **JWT Authentication**: Ensure you are sending the JWT token in the `Authorization` header for endpoints that require authentication, also you can send it by swagger "Authorize" button

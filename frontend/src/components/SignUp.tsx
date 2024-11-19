@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import PasswordInput from './Common/PasswordInput';
-import './SignUp.css';  // הוספת קובץ ה-CSS
-
-//import { SignupRequest } from '../types/api';
+import './SignUp.css';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +11,6 @@ const SignUp = () => {
   });
   const [message, setMessage] = useState<string>('');
 
-  const [password, setPassword] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
 
   const handlePasswordChange = (newPassword: string, validationError: string) => {
@@ -30,11 +27,11 @@ const SignUp = () => {
     e.preventDefault();
     try {
       let result;
-       await axios.post('http://localhost:5009/api/Auth/signup', formData).
-      then((res) => result = res.data);
+      await axios.post('http://localhost:5009/api/Auth/signup', formData).
+        then((res) => result = res.data);
       setMessage('Signup successful! You can now log in.');
       window.location.href = '/login';
-    } 
+    }
     catch (error: unknown) {
       console.error(error);
       setMessage('Signup failed. Please try again.');

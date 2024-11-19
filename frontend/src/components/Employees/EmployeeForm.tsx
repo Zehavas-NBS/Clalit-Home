@@ -3,14 +3,7 @@ import { Employee } from "../../types";
 import "./EmployeeForm.css";
 
 
-// interface EmployeeFormProps {
-//   employee?: Employee;
-//   readOnly: boolean;
-//   onSave: (employee: Employee, isNew : boolean) => void;
-//   onCancel: () => void;
-// }
-
-const EmployeeForm=  ({ employee, onSave, onCancel , readOnly} : any) => {
+const EmployeeForm = ({ employee, onSave, onCancel, readOnly }: any) => {
   const [fullName, setFullName] = useState<string>(employee?.fullName || "");
   const [email, setEmail] = useState<string>(employee?.email || "");
   const [isNew] = useState<boolean>(employee?.id === undefined);
@@ -24,24 +17,24 @@ const EmployeeForm=  ({ employee, onSave, onCancel , readOnly} : any) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const a = {...employee, fullName, email, id: employee?.id || ""};
-  
+    const a = { ...employee, fullName, email, id: employee?.id || "" };
+
     onSave({ ...employee, fullName, email, id: employee?.id || "" }, isNew);
   };
 
   return (
     <form className="employee-form" onSubmit={handleSubmit} >
       {
-      !readOnly?  <h2>{employee ? "Edit Employee" : "Add New Employee"}</h2> : <h2>{"Employee Details"}</h2>
+        !readOnly ? <h2>{employee ? "Edit Employee" : "Add New Employee"}</h2> : <h2>{"Employee Details"}</h2>
       }
       <label>
         Name:
         <input
           type="text"
-          
+
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          readOnly={readOnly} // במצב קריאה בלבד, השדה לא ניתן לעריכה
+          readOnly={readOnly}
           required={!readOnly}
         />
       </label>
@@ -51,8 +44,7 @@ const EmployeeForm=  ({ employee, onSave, onCancel , readOnly} : any) => {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          readOnly={readOnly} // במצב קריאה בלבד, השדה לא ניתן לעריכה
-          required={!readOnly}
+          readOnly={readOnly}
         />
       </label>
       {!readOnly && <div className="form-buttons">
@@ -62,7 +54,7 @@ const EmployeeForm=  ({ employee, onSave, onCancel , readOnly} : any) => {
           Cancel
         </button>
       </div>
-  }
+      }
     </form>
   );
 };

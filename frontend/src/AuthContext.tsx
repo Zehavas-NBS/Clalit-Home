@@ -8,14 +8,12 @@ interface AuthContextProps {
   logout: () => void;
 }
 
-// ברירת מחדל לקונטקסט
 const AuthContext = createContext<AuthContextProps>({
   currentManager: null,
-  login: () => {},
-  logout: () => {},
+  login: () => { },
+  logout: () => { },
 });
 
-// ספק (Provider) שמנהל את הקונטקסט
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [currentManager, setCurrentManager] = useState<Employee | null>(null);
 
@@ -34,5 +32,4 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   );
 };
 
-// הוק לשימוש בקונטקסט בצורה נוחה
 export const useAuth = () => useContext(AuthContext);

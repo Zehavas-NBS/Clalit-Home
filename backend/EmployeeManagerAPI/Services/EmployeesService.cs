@@ -2,6 +2,7 @@
 using EmployeeManagerAPI.Models;
 using EmployeeManagerAPI.Models.Requests;
 using EmployeeManagerAPI.Models.Responses;
+using EmployeeManagerAPI.Validations;
 using log4net;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
@@ -75,6 +76,22 @@ namespace EmployeeManagerAPI.Services
                 // Extract ManagerId from Claims
                 var managerId = GetManagerIdFromClaims(user);
 
+                // Validate email format
+                if (string.IsNullOrWhiteSpace(request.Email) || !ValidationHelper.IsValidEmail(request.Email))
+                {
+                    _logger.Warn($"Invalid email format: {request.Email}");
+                    throw new ArgumentException(ErrorMessages.InvalidEmail);
+                }
+
+
+                // Validate full name
+                if (string.IsNullOrWhiteSpace(request.FullName) || request.FullName.Length < 2)
+                {
+                    _logger.Warn($"Invalid full name provided: {request.FullName}");
+                    throw new ArgumentException(ErrorMessages.InvalidFullName);
+
+                }
+
                 // Create new Employee instance
                 var newEmployee = new Employee(request.Email, request.FullName, request.Password, managerId);
 
@@ -98,32 +115,6 @@ namespace EmployeeManagerAPI.Services
             }
         }
 
-        //internal async Task<CRUDEmployeeResponse> AddEmployee(AddEmployeeRequest request, ClaimsPrincipal user)
-        //{
-        //    _logger.Info("Creating a new employee...");
-        //    try
-        //    {
-        //        var managerIdClaim = user.FindFirst(JwtRegisteredClaimNames.Jti);
-        //        //if (managerIdClaim == null)
-        //        //{
-        //        //    return Unauthorized(new { message = "Unauthorized access." });
-        //        //}
-        //        Guid managerId = Guid.Parse(managerIdClaim.Value);
-
-        //        Employee newEmployee = new Employee(request.Email, request.FullName, request.Password, managerId);
-              
-        //        var data = _context.Employees.Add(newEmployee);
-        //        await _context.SaveChangesAsync();
-        //        _logger.InfoFormat("Employee created successfully with ID: {Id}.", newEmployee.Id);
-
-        //        return new CRUDEmployeeResponse() { EmployeeData = newEmployee };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.Error("Error occurred while creating a new employee.", ex);
-        //        throw new Exception("An error occurred while creating the employee.", ex);
-        //    }
-        //}
 
         internal async Task<bool> DeleteEmployee(Guid id)
         {
