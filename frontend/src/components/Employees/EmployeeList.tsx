@@ -30,7 +30,6 @@ const EmployeeList = ({ employees, onSelect, onDelete } : EmployeeListProps) => 
       onDelete(employee.id);
     }
 const columns = [
-  { field: 'id', headerName: 'ID', width: 150 },
   { field: 'fullName', headerName: 'Name', width: 200 },
   { field: 'email', headerName: 'Email', width: 250 },
   {

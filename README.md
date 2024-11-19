@@ -2,7 +2,23 @@
 
 # Employee Manager Application
 
-This is a full-stack Employee Manager application built using **.NET Core** for the backend API and **React** for the frontend. The application allows managers to register, login, and manage their employees.
+This is a full-stack Employee Manager application built using **.NET 8** for the backend API and **React** for the frontend. The application allows managers to register, login, and manage their employees.
+
+## Print screen of system
+![alt text](image-9.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-8.png)
+![alt text](image-4.png)
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+
+
+
+
 
 ## Requirements
 
@@ -40,17 +56,6 @@ Before running the application, ensure that you have the following installed on 
    dotnet restore
    ```
 
-4. **Configure the Database:**
-
-   In the case of SQLite, you don't need a separate SQL Server instance, but ensure that your `appsettings.json` is configured for SQLite. Here's an example of what the connection string might look like in `appsettings.json`:
-
-   ```json
-   "ConnectionStrings": {
-     "DefaultConnection": "Data Source=app.db"
-   }
-   ```
-
-   This will create the `app.db` SQLite database file in the root directory when you run the application.
 
 5. **Run the Migrations:**
 
@@ -68,7 +73,7 @@ Before running the application, ensure that you have the following installed on 
    dotnet run
    ```
 
-   The application should be running on [http://localhost:5009](http://localhost:5000).
+   The application should be running on [http://localhost:5009](http://localhost:5009).
 
 ## Setting Up the Frontend (Client-side)
 
@@ -112,11 +117,16 @@ You can test the API endpoints using tools like **Postman** or **cURL**. Below a
 - `POST /api/auth/login`: Log in and obtain a JWT token.
   - Request body: `{ "email": "manager@example.com", "password": "YourPassword123" }`
 - `GET /api/Employees/getEmployeesByManagerId`: Get employees for the currently logged-in manager (requires JWT).
+- `POST /api/Employees/add`: Add employee for the currently logged-in manager(requires JWT).
+  - Request body: `{ "email": "manager@example.com", "password": "YourPassword123" , "fullName": "Cohen"}`
+- `PUT /api/Employees/update`: Update employee for the currently logged-in manager(requires JWT).
+  - Request body: `{ "email": "manager@example.com", "password": "YourPassword123" , "fullName": "Cohen"}`
+- `Delete /api/Employees/delete/{id}`: Delete employee by id for the currently logged-in manager(requires JWT).
 
 ### Example API Request Using cURL (Login)
 
 ```bash
-curl -X POST "http://localhost:5000/api/auth/login" -H "Content-Type: application/json" -d '{"email":"manager@example.com","password":"YourPassword123"}'
+curl -X POST "http://localhost:5009/api/auth/login" -H "Content-Type: application/json" -d '{"email":"manager@example.com","password":"YourPassword123"}'
 ```
 
 This will return a JWT token, which can be used for further authenticated API requests (e.g., fetching employees).
@@ -124,7 +134,7 @@ This will return a JWT token, which can be used for further authenticated API re
 ### Example API Request Using cURL (Fetch Employees)
 
 ```bash
-curl -X GET "http://localhost:5000/api/employees/my-employees" -H "Authorization: Bearer YOUR_JWT_TOKEN"
+curl -X GET "http://localhost:5009/api/Employees/getEmployeesByManagerId" -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
 ---
@@ -135,10 +145,10 @@ The project consists of two main parts:
 
 - **Server (Backend)**
   - Handles API requests and database operations.
-  - Located in the `Server` directory.
+  - Located in the `backend` directory.
 - **Client (Frontend)**
   - Built with React and communicates with the API.
-  - Located in the `Client` directory.
+  - Located in the `frontend` directory.
 
 ---
 

@@ -20,25 +20,38 @@ namespace EmployeeManagerAPI.Services
             _context = context;
         }
 
+        // Helper method to extract ManagerId from Claims
+        private Guid GetManagerIdFromClaims(ClaimsPrincipal user)
+        {
+            var managerIdClaim = user.FindFirst(JwtRegisteredClaimNames.Jti);
+            if (managerIdClaim == null || string.IsNullOrEmpty(managerIdClaim.Value))
+            {
+                throw new InvalidOperationException("Manager ID claim is missing or invalid.");
+            }
+
+            return Guid.Parse(managerIdClaim.Value);
+        }
 
         public async Task<ICollection<GetEmployeesResponse>> GetEmployeesByManagerId(ClaimsPrincipal user)
         {
             _logger.Info("Fetching all employees from the database.");
 
-            var managerIdClaim = user.FindFirst(JwtRegisteredClaimNames.Jti);
             try
             {
-                Guid managerId = Guid.Parse(managerIdClaim.Value);
-                Manager manager = await _context.Managers.FirstOrDefaultAsync(u => u.Id == managerId);
-                var employees = await _context.Employees.Where(u => u.ManagerId == manager.Id).Select(emp =>
-                    new GetEmployeesResponse()
+                // Extract ManagerId from Claims
+                var managerId = GetManagerIdFromClaims(user);
+
+                // Fetch employees directly based on ManagerId
+                var employees = await _context.Employees
+                    .Where(emp => emp.ManagerId == managerId)
+                    .Select(emp => new GetEmployeesResponse
                     {
                         Email = emp.Email,
                         FullName = emp.FullName,
                         Id = emp.Id,
                         Password = emp.Password
-                    }
-                    ).ToListAsync();
+                    })
+                    .ToListAsync();
                 _logger.InfoFormat("Successfully fetched {Count} employees.", employees.Count);
 
                 return employees;
@@ -55,30 +68,62 @@ namespace EmployeeManagerAPI.Services
 
         internal async Task<CRUDEmployeeResponse> AddEmployee(AddEmployeeRequest request, ClaimsPrincipal user)
         {
-            _logger.Info("Creating a new employee...");
+            _logger.Info("Initiating the creation of a new employee.");
+
             try
             {
-                var managerIdClaim = user.FindFirst(JwtRegisteredClaimNames.Jti);
-                //if (managerIdClaim == null)
-                //{
-                //    return Unauthorized(new { message = "Unauthorized access." });
-                //}
-                Guid managerId = Guid.Parse(managerIdClaim.Value);
+                // Extract ManagerId from Claims
+                var managerId = GetManagerIdFromClaims(user);
 
-                Employee newEmployee = new Employee(request.Email, request.FullName, request.Password, managerId);
-              
-                var data = _context.Employees.Add(newEmployee);
+                // Create new Employee instance
+                var newEmployee = new Employee(request.Email, request.FullName, request.Password, managerId);
+
+                // Add to database
+                _context.Employees.Add(newEmployee);
                 await _context.SaveChangesAsync();
-                _logger.InfoFormat("Employee created successfully with ID: {Id}.", newEmployee.Id);
 
-                return new CRUDEmployeeResponse() { EmployeeData = newEmployee };
+                _logger.InfoFormat("Employee successfully created with ID: {Id}.", newEmployee.Id);
+
+                return new CRUDEmployeeResponse { EmployeeData = newEmployee };
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.Error("Failed to retrieve manager ID from user claims.", ex);
+                throw new UnauthorizedAccessException("Unable to identify the manager. Unauthorized request.", ex);
             }
             catch (Exception ex)
             {
-                _logger.Error("Error occurred while creating a new employee.", ex);
-                throw new Exception("An error occurred while creating the employee.", ex);
+                _logger.Error("An unexpected error occurred while creating the employee.", ex);
+                throw new Exception("An error occurred while creating the employee. Please try again later.", ex);
             }
         }
+
+        //internal async Task<CRUDEmployeeResponse> AddEmployee(AddEmployeeRequest request, ClaimsPrincipal user)
+        //{
+        //    _logger.Info("Creating a new employee...");
+        //    try
+        //    {
+        //        var managerIdClaim = user.FindFirst(JwtRegisteredClaimNames.Jti);
+        //        //if (managerIdClaim == null)
+        //        //{
+        //        //    return Unauthorized(new { message = "Unauthorized access." });
+        //        //}
+        //        Guid managerId = Guid.Parse(managerIdClaim.Value);
+
+        //        Employee newEmployee = new Employee(request.Email, request.FullName, request.Password, managerId);
+              
+        //        var data = _context.Employees.Add(newEmployee);
+        //        await _context.SaveChangesAsync();
+        //        _logger.InfoFormat("Employee created successfully with ID: {Id}.", newEmployee.Id);
+
+        //        return new CRUDEmployeeResponse() { EmployeeData = newEmployee };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.Error("Error occurred while creating a new employee.", ex);
+        //        throw new Exception("An error occurred while creating the employee.", ex);
+        //    }
+        //}
 
         internal async Task<bool> DeleteEmployee(Guid id)
         {
@@ -107,7 +152,7 @@ namespace EmployeeManagerAPI.Services
             }
         }
 
-        internal async Task<Employee> EditEmployee(EmployeeBase employee)
+        internal async Task<Employee> EditEmployee(AddEmployeeRequest employee)
         {
             var exsitingEmployee = await _context.Employees.FirstOrDefaultAsync(employee => employee.Id == employee.Id);
 

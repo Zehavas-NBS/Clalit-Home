@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import EmployeeList from "./EmployeeList";
 import EmployeeForm from "./EmployeeForm";
 import { Employee } from "../../types";
-import axios from "axios"; 
 import { useAuth } from "../../AuthContext";
 import "./EmployeeManager.css";
+import axiosInstance from "../../Infra/axiosInstance";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+
 
 
 const EmployeeManager =() => {
@@ -22,17 +25,8 @@ const EmployeeManager =() => {
     const fetchEmployees = async () => {
       if (currentManager) {
         try {
+          const response = await axiosInstance.post("/Employees/getEmployeesByManagerId");
 
-          const response = await axios.post(
-            "http://localhost:5009/api/Employees/getEmployeesByManagerId",
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-                "Content-Type": "application/json", // שים לב לשימוש הנכון
-              },
-            }
-          );
           if (response.data) {
             setEmployees(response.data);
           } 
@@ -66,58 +60,49 @@ const EmployeeManager =() => {
   }, [searchTerm]);
 
   const handleSave = async (employee: Employee, isNew : boolean) => {
+      // Update existing employee
+   
     if (employee.id) {
       try {
-console.log(employee);
-        const response = await axios.put(
-            `http://localhost:5009/api/Employees/update/${employee.id}`,
+         await axiosInstance.put(`/Employees/update`,
             {
-             employee
-            },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-              "Content-Type": "application/json", // שים לב לשימוש הנכון
-            },
-          }
+              id: employee.id,
+              fullName: employee.fullName,
+              email: employee.email,
+              password: employee.password,
+            }
         );
-        if (response.status.toString() === "200") {
           setEmployees((prev) =>
             prev.map((e) => (e.id === employee.id ? employee : e))
           );
-        } 
-      } catch (err) {
+      }
+       catch (err) {
         //setError("Invalid email or password.");
       }
      
-      // Update existing employee
       
     } else {
       // Add new employee
 
       try {
 
-        const response = await axios.post(
-            `http://localhost:5009/api/Employees/add`,employee,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-              "Content-Type": "application/json", // שים לב לשימוש הנכון
-            },
-          }
+        const response = await axiosInstance.post(
+            `http://localhost:5009/api/Employees/add`,{
+              id: employee.id,
+              fullName: employee.fullName,
+              email: employee.email,
+              password: employee.password,
+            }
         );
-        if (response.status.toString() === "200") {
-          const { EmployeeData} = response.data;
+          const { employeeData} = response.data.response;
+          console.log(employeeData);
           setEmployees((prev) => [
             ...prev,
-            { ...EmployeeData },
+            { ...employee, id: employeeData.id },
           ]);
-        } 
       } catch (err) {
         //setError("Invalid email or password.");
       }
-      
-     
     }
     setSelectedEmployee(null);
   };
@@ -125,19 +110,8 @@ console.log(employee);
   const handleDelete = async (id: string) => {
     
     try {
-
-      const response = await axios.delete(
-          `http://localhost:5009/api/Employees/delete/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-            "Content-Type": "application/json", // שים לב לשימוש הנכון
-          },
-        }
-      );
-      if (response.status.toString() === "200") {
-        setEmployees((prev) => prev.filter((e) => e.id !== id));
-      } 
+      await axiosInstance.delete(`/Employees/delete/${id}`);
+      setEmployees((prev) => prev.filter((e) => e.id !== id));
       setSelectedEmployee(null);
     } catch (err) {
       //setError("Invalid email or password.");
@@ -149,12 +123,20 @@ console.log(employee);
     setSelectedEmployee(null);
   };
 
-
-  
+  const handleSelect = (event: any, value: Employee | null) => {
+    if (value) {
+      const filteredData = employees.filter((employee) => employee.id === value.id);
+      setFilteredEmployees(filteredData);
+      console.log('Selected employee:', value);
+    }
+    else
+    {
+      setFilteredEmployees(employees);
+    }
+  };
 
   return (
     <div className="employee-manager">
-      <h1 className="header">Employee Manager</h1>
       {selectedEmployee ? (
           <div className="employee-form-container">
         <EmployeeForm
@@ -168,25 +150,48 @@ console.log(employee);
         <>
           <div className="employee-list-container">
               {/* Search Input */}
-          <div className="search-container">
-            <input
-              type="text"
-              placeholder="Search by name..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
-              style={{ width: "30%" }}
-            />
+            
+              <div className="header">
+    
+            <Autocomplete
+                options={employees}
+                getOptionLabel={(option) => option.fullName || ""} 
+                onChange={handleSelect}
+                style={{ width: "30%" }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Search by name..."
+                    variant="outlined"
+                    // onChange={(e) => setSearchTerm(e.target.value)}
+                    InputProps={{
+                      ...params.InputProps,
+                    
+                    }}
+                  />
+                )}/>
+                    <img
+          src="/images/daily-briefing.jpg" // נתיב לתמונה
+          alt="Logo"
+          style={{ height: '100px', width: '150px' }}
+        />
           </div>
           <EmployeeList
             employees={filteredEmployees}
             onSelect={setSelectedEmployee}
             onDelete={handleDelete}
           />
-         
+         {/* <div className="header">
+        <img
+          src="/images/daily-briefing.jpg" // נתיב לתמונה
+          alt="Logo"
+          style={{ height: '120px', width: '100px' }}
+        /> */}
+      
           <button  className="add-employee-button" onClick={() => setSelectedEmployee({ id: "", fullName: "", email: "", password:"" })}>
             Add Employee
           </button>
+          {/* </div> */}
           </div>
         </>
       )}

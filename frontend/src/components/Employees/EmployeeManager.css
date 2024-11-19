@@ -10,6 +10,8 @@
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
   }
   
   .employee-list-container {
@@ -26,6 +28,7 @@
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
+    width: 10%;
   }
 /* transition: background 0.3s ease; */
 

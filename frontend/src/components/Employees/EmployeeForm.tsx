@@ -25,8 +25,7 @@ const EmployeeForm=  ({ employee, onSave, onCancel , readOnly} : any) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const a = {...employee, fullName, email, id: employee?.id || ""};
-    console.log(a);
-    console.log(employee);
+  
     onSave({ ...employee, fullName, email, id: employee?.id || "" }, isNew);
   };
 

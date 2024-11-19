@@ -71,12 +71,12 @@ namespace EmployeeManagerAPI.Controllers
         }
 
         // עדכון עובד קיים
-        [HttpPut("update/{id}")]
+        [HttpPut("update")]
         [Authorize]
 
-        public async Task<IActionResult> UpdateEmployee(Guid id, [FromBody] EmployeeBase updatedEmployee)
+        public async Task<IActionResult> UpdateEmployee([FromBody] AddEmployeeRequest updatedEmployee)
         {
-            log.InfoFormat("Updating employee with ID: {Id}", id);
+            log.InfoFormat("Updating employee with ID: {Id}", updatedEmployee.Email);
 
             try
             {
@@ -85,17 +85,17 @@ namespace EmployeeManagerAPI.Controllers
                 var response = await _employeesService.EditEmployee(updatedEmployee);
                 if (response == null)
                 {
-                    log.WarnFormat("Employee with ID {Id} not found for update.", id);
+                    log.WarnFormat("Employee with ID {Id} not found for update.", updatedEmployee.Email);
                     return NotFound("Employee not found.");
                 }
-                log.InfoFormat("Employee with ID: {Id} updated successfully.", id);
+                log.InfoFormat("Employee with ID: {Id} updated successfully.", updatedEmployee.Email);
 
 
                 return Ok(new { message = "Employee updated successfully.", response });
             }
             catch (Exception ex)
             {
-                log.ErrorFormat("Error occurred while updating employee with ID: {Id}", id, ex);
+                log.ErrorFormat("Error occurred while updating employee with ID: {Id}", updatedEmployee.Email, ex);
                 return StatusCode(500, "An error occurred while updating the employee.");
             }
         }
