@@ -13,9 +13,14 @@
   .signUp
   {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
   
+  .signUpNewManager
+  {
+    display: flex;
+    flex-direction: row;
+  }
   h1 {
     font-size: 2rem;
     color: #333;

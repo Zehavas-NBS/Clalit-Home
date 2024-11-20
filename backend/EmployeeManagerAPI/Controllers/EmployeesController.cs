@@ -1,11 +1,8 @@
-﻿using EmployeeManagerAPI.Models;
-using EmployeeManagerAPI.Models.Requests;
+﻿using EmployeeManagerAPI.Models.Requests;
 using EmployeeManagerAPI.Services;
 using log4net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Serilog;
 
 namespace EmployeeManagerAPI.Controllers
 {
@@ -13,11 +10,11 @@ namespace EmployeeManagerAPI.Controllers
     [Route("api/[controller]")]
     public class EmployeesController : ControllerBase
     {
-        private readonly EmployeesService _employeesService;
+        private readonly IEmployeeService _employeesService;
         private static readonly ILog log = LogManager.GetLogger(typeof(EmployeesController));
 
 
-        public EmployeesController(EmployeesService employeesService)
+        public EmployeesController(IEmployeeService employeesService)
         {
             _employeesService = employeesService;
 
@@ -55,8 +52,7 @@ namespace EmployeeManagerAPI.Controllers
                 var response = await _employeesService.AddEmployee(request, User);
                 log.InfoFormat("Employee created successfully with ID: {Id}", response.EmployeeData.Id);
 
-                //if (response == null)
-                //    return BadRequest("Employee data is invalid.");
+               
 
                 return Ok(new { message = "Employee added successfully.", response });
 
@@ -70,7 +66,6 @@ namespace EmployeeManagerAPI.Controllers
 
         }
 
-        // עדכון עובד קיים
         [HttpPut("update")]
         [Authorize]
 
@@ -100,7 +95,7 @@ namespace EmployeeManagerAPI.Controllers
             }
         }
 
-        // מחיקת עובד לפי ID
+       
         [HttpDelete("delete/{id}")]
         [Authorize]
 

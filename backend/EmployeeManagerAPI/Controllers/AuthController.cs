@@ -12,9 +12,9 @@ namespace EmployeeManagerAPI.Controllers
        
         private readonly ILog _logger;
 
-        private readonly AuthService _authService;
+        private readonly IAuthService _authService;
 
-        public AuthController(AuthService authService)
+        public AuthController(IAuthService authService)
         {
             _logger = LogManager.GetLogger(typeof(AuthController));
             _authService = authService;

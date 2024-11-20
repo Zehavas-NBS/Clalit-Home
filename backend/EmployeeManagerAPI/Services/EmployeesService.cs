@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace EmployeeManagerAPI.Services
 {
-    public class EmployeesService
+    public class EmployeesService : IEmployeeService
     {
         private readonly AppDbContext _context;
         private readonly ILog _logger;
@@ -67,7 +67,7 @@ namespace EmployeeManagerAPI.Services
 
         }
 
-        internal async Task<CRUDEmployeeResponse> AddEmployee(AddEmployeeRequest request, ClaimsPrincipal user)
+        public async Task<CRUDEmployeeResponse> AddEmployee(AddEmployeeRequest request, ClaimsPrincipal user)
         {
             _logger.Info("Initiating the creation of a new employee.");
 
@@ -116,7 +116,7 @@ namespace EmployeeManagerAPI.Services
         }
 
 
-        internal async Task<bool> DeleteEmployee(Guid id)
+        public async Task<bool> DeleteEmployee(Guid id)
         {
             _logger.InfoFormat("Deleting employee with ID: {Id}.", id);
             try
@@ -143,7 +143,7 @@ namespace EmployeeManagerAPI.Services
             }
         }
 
-        internal async Task<Employee> EditEmployee(AddEmployeeRequest employee)
+        public async Task<Employee> EditEmployee(AddEmployeeRequest employee)
         {
             var exsitingEmployee = await _context.Employees.FirstOrDefaultAsync(employee => employee.Id == employee.Id);
 

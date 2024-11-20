@@ -66,8 +66,10 @@ const LogIn = (props: { onLogIn: (token: string) => void }) => {
           {error &&
             <div className="signUp">
               <p style={{ color: "red" }}>{error}</p>
-              <p>New manager? Sign up</p>
-              <button type="button" onClick={() => window.location.href = "/signup"}>Sign Up</button>
+              <div>
+                <p>New manager? Sign up</p>
+                <button type="button" onClick={() => window.location.href = "/signup"}>Sign Up</button>
+              </div>
             </div>
           }
           <button type="submit">Log In</button>

@@ -4,17 +4,15 @@ using EmployeeManagerAPI.Models.Requests;
 using EmployeeManagerAPI.Models.Responses;
 using EmployeeManagerAPI.Validations;
 using log4net;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace EmployeeManagerAPI.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly IConfiguration _configuration;
         private readonly AppDbContext _context;
@@ -56,7 +54,7 @@ namespace EmployeeManagerAPI.Services
                     throw new ArgumentException(ErrorMessages.InvalidFullName);
 
                 }
-                // בדיקת אם הדוא"ל כבר קיים
+                //check if exsiting this user
                 var existingUser = await _context.Managers.FirstOrDefaultAsync(u => u.Email == request.Email);
                 if (existingUser != null)
                 {
@@ -72,7 +70,7 @@ namespace EmployeeManagerAPI.Services
                 // 4. Create new manager
                 var manager = new Manager(request.Email, request.FullName, hashedPassword);
                
-                // יצירת עובדים ברירת מחדל
+                //mock employees
                 var defaultEmployees = new List<Employee>
         {
             new Employee("employee1@example.com",  "Default Employee 1",BCrypt.Net.BCrypt.HashPassword("password1"),manager.Id),
@@ -83,15 +81,11 @@ namespace EmployeeManagerAPI.Services
             new Employee("employreqree2@example.com", "Default Employee 6",BCrypt.Net.BCrypt.HashPassword("password2"),manager.Id)
         };
 
-                // הוספת המנהל והעובדים ל-DB
                 manager.Employees = defaultEmployees;
-                // _dbContext.Managers.Add(manager);
-                // הוספת המשתמש החדש לבסיס הנתונים
                 await _context.Managers.AddAsync(manager);
                 await _context.SaveChangesAsync();
                 _logger.Info($"User registered successfully with email: {request.Email}");
 
-                // החזרת טוקן JWT למקרה הצורך
                 return manager;
             }
             catch (Exception ex)
