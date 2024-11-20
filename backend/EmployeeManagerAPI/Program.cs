@@ -1,11 +1,10 @@
 using EmployeeManagerAPI.Data;
 using EmployeeManagerAPI.Services;
+using log4net.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using log4net;
-using log4net.Config;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,9 +38,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-// אתחול log4net מהגדרות הקובץ appsettings.json
 XmlConfigurator.Configure(new FileInfo("log4net.config"));
-builder.Logging.AddProvider(new Log4NetProvider("log4net.config"));  // הוסף את קובץ הקונפיגורציה
+builder.Logging.AddProvider(new Log4NetProvider("log4net.config")); 
 
 
 builder.Services.AddCors(options =>
@@ -55,17 +53,14 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Add services to the container.
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
-  //  options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>();
-// הוספת שירות AuthService
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<EmployeesService>();
 
@@ -104,7 +99,6 @@ var app = builder.Build();
 app.UseCors("AllowSpecificOrigin");
 
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
