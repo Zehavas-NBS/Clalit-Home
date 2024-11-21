@@ -115,7 +115,7 @@ namespace EmployeeManagerAPI.Services
             }
         }
 
-
+        //TODO : Zehava - Change this func use EntityId , It's not right Guid
         public async Task<bool> DeleteEmployee(Guid id)
         {
             _logger.InfoFormat("Deleting employee with ID: {Id}.", id);
