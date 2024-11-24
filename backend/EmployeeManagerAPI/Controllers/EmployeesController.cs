@@ -69,7 +69,7 @@ namespace EmployeeManagerAPI.Controllers
         [HttpPut("update")]
         [Authorize]
 
-        public async Task<IActionResult> UpdateEmployee([FromBody] AddEmployeeRequest updatedEmployee)
+        public async Task<IActionResult> UpdateEmployee([FromBody] EditEmployeeRequest updatedEmployee)
         {
             log.InfoFormat("Updating employee with ID: {Id}", updatedEmployee.Email);
 

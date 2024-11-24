@@ -143,9 +143,9 @@ namespace EmployeeManagerAPI.Services
             }
         }
 
-        public async Task<Employee> EditEmployee(AddEmployeeRequest employee)
+        public async Task<Employee> EditEmployee(EditEmployeeRequest employeeRequest)
         {
-            var exsitingEmployee = await _context.Employees.FirstOrDefaultAsync(employee => employee.Id == employee.Id);
+            var exsitingEmployee = await _context.Employees.FirstOrDefaultAsync(employee => employee.Id == employeeRequest.Id);
 
             if (exsitingEmployee == null)
             {
@@ -153,9 +153,9 @@ namespace EmployeeManagerAPI.Services
             }
 
 
-            exsitingEmployee.Email = employee.Email;
-            exsitingEmployee.FullName = employee.FullName;
-            exsitingEmployee.Password = employee.Password;
+            exsitingEmployee.Email = employeeRequest.Email;
+            exsitingEmployee.FullName = employeeRequest.FullName;
+            exsitingEmployee.Password = employeeRequest.Password;
 
             var data = _context.Employees.Update(exsitingEmployee);
             await _context.SaveChangesAsync();

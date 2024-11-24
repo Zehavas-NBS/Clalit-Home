@@ -10,7 +10,7 @@ namespace EmployeeManagerAPI.Services
         Task<ICollection<GetEmployeesResponse>> GetEmployeesByManagerId(ClaimsPrincipal user);
         Task<CRUDEmployeeResponse> AddEmployee(AddEmployeeRequest request, ClaimsPrincipal user);
         Task<bool> DeleteEmployee(Guid id);
-        Task<Employee> EditEmployee(AddEmployeeRequest employee);
+        Task<Employee> EditEmployee(EditEmployeeRequest employee);
 
     }
 }
